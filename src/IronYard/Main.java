@@ -105,7 +105,7 @@ public class Main {
 
                     String messageSurgeon = request.queryParams("messageSurgeon");
                     Messages messageString = new Messages(messageSurgeon);
-                    user.messageList.add(messageString);
+                    user.messageList.add(fut-1, messageString);
 
                     response.redirect("/");
                     return "";
