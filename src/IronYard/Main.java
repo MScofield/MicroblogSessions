@@ -22,7 +22,7 @@ public class Main {
                 "/",
                 ((request, response) -> {
                     Session session = request.session();
-                    String name = session.attribute("userName");
+                    String name = session.attribute("loginName");
                     //String password = session.attribute("userPassword");
                     User user = users.get(name);
 
