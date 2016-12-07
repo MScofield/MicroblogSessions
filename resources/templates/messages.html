@@ -6,11 +6,20 @@
 </head>
 <body>
 <form action="/logout" method="post">
-    <button type="submit">Logout</button>
+    <button type="submit">Disappear!!</button>
 </form>
 <form action="/create-message" method="post">
     <input type="text" placeholder="Write a message" name="messageBox"/>
-    <button type="submit">Submit</button>
+    <button type="submit">Remember this!!</button>
+</form>
+<form action="/edit-message" method="post">
+    <input type="text" placeholder="MSG number to edit" name="messageMangler"/>
+    <input type="text" placeholder="MSG new text" name="messageSurgeon"/>
+    <button type="submit">Make Edit Love</button>
+</form>
+<form action="/delete-message" method="post">
+    <input type="text" placeholder="MSG number to del" name="messageKiller"/>
+    <button type="submit">Delete!!</button>
 </form>
 Messages by {{name}}:
 <ol>

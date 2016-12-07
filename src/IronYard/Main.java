@@ -40,6 +40,7 @@ public class Main {
                 }),
                 new MustacheTemplateEngine()
         );
+
         Spark.post(
                 "/logout",
                 ((request, response) -> {
@@ -61,11 +62,11 @@ public class Main {
                         user = new User(name, password);
                         users.put(name, user);
                     }
-                    if (user.password.equals(password));
+                    if (password.equals(user.password));
                     {
                         Session session = request.session();
-                        session.attribute("userName", name);
-                        session.attribute("userPassword", password);
+                        session.attribute("loginName", name);
+                        session.attribute("loginPassword", password);
                     }
                     response.redirect("/");
                     return "";
@@ -76,7 +77,7 @@ public class Main {
                 "/create-message",
                 ((request, response) -> {
                     Session session = request.session();
-                    String name = session.attribute("userName");
+                    String name = session.attribute("loginName");
                     User user = users.get(name);
                     if (user == null) {
                         throw new Exception("User is not logged in");
@@ -91,8 +92,42 @@ public class Main {
                 })
         );
 
+        Spark.post(
+                "/edit-message",
+                ((request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("loginName");
+                    User user = users.get(name);
+                    String messageMangler = request.queryParams("messageMangler");
+                    int fut = Integer.parseInt(messageMangler);
+                    user.messageList.get(fut-1);
+                    user.messageList.remove(fut-1);
 
+                    String messageSurgeon = request.queryParams("messageSurgeon");
+                    Messages messageString = new Messages(messageSurgeon);
+                    user.messageList.add(messageString);
+
+                    response.redirect("/");
+                    return "";
+
+                })
+        );
+
+        Spark.post(
+                "/delete-message",
+                ((request, response) -> {
+                    Session session = request.session();
+                    String name = session.attribute("loginName");
+                    User user = users.get(name);
+                    String messageKiller = request.queryParams("messageKiller");
+
+                    int fu = Integer.parseInt(messageKiller);
+                    user.messageList.remove(fu - 1);
+
+                    response.redirect("/");
+                    return "";
+                })
+        );
     }
-
 }
 
