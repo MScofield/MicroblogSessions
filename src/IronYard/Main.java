@@ -34,7 +34,6 @@ public class Main {
                     } else {
                         userHash.put("name", user.name);
                         userHash.put("messageAdd", user.messageList);
-                        userHash.put("password", user.password);
                         return new ModelAndView(userHash, "messages.html");
                     }
                 }),
@@ -61,6 +60,7 @@ public class Main {
                     {
                         user = new User(name, password);
                         users.put(name, user);
+
                     }
                     if (password.equals(user.password));
                     {
